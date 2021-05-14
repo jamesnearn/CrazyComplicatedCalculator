@@ -7,8 +7,19 @@ namespace CrazyCalcConsole
     {
         static void Main(string[] args)
         {
+            var problem = String.Join("", args);
+            Console.WriteLine($"problem: {problem}");
+
             var m = new MathEngine();
-            Console.WriteLine($"2 + 3 = {m.Add(2,3)}");
+            int answer;
+            if (m.TryParse(problem, out answer))
+            {
+                Console.WriteLine($"answer: {answer}");
+            }
+            else
+            {
+                Console.WriteLine($"Error parsing problem.");
+            }
         }
     }
 }

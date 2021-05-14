@@ -4,9 +4,23 @@ namespace CrazyCalcEngine
 {
     public class MathEngine
     {
-        public int Add(int x, int y)
+        public bool TryParse(string given, out int result)
         {
-            return x + y;
+            var addendums = given.Split('+');
+            result = 0;
+            foreach (var addendum in addendums)
+            {
+                int newVal = 0;
+                if (int.TryParse(addendum, out newVal))
+                {
+                    result += newVal;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

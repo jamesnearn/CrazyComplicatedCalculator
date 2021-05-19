@@ -1,4 +1,5 @@
 ﻿using System;
+using NearnCSharpExtensions;
 
 namespace CrazyCalcEngine
 {
@@ -6,12 +7,12 @@ namespace CrazyCalcEngine
     {
         public bool TryParse(string given, out int result)
         {
-            var addendums = given.Split('+');
+            var addendums = given.RemoveSpaces().Split('+');
             result = 0;
             foreach (var addendum in addendums)
             {
                 int newVal = 0;
-                if (int.TryParse(addendum, out newVal))
+                if (!String.IsNullOrEmpty(addendum) && int.TryParse(addendum, out newVal))
                 {
                     result += newVal;
                 }

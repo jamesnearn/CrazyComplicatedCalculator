@@ -8,12 +8,11 @@ namespace CrazyCalcEngine.Tests
     {
         [Theory]
         [InlineData("2+3", 5)]
-        [InlineData("2++3", 5)]
 
         [InlineData("2+3 + 4", 9)]
         [InlineData("2 + 3+4", 9)]
         [InlineData("2+3+4", 9)]
-        [InlineData("2+3+4", 9)]
+        [InlineData("2 + 3 + 4", 9)]
 
         [InlineData("2", 2)]
         [InlineData("-2", -2)]
@@ -24,17 +23,13 @@ namespace CrazyCalcEngine.Tests
         {
             var m = new MathEngine();
             int actual;
-            if (m.TryParse(given, out actual))
-            {
-                Assert.Equal(expected, actual);
-            }
-            else
-            {
-                Assert.False(false, "TryParse should not fail.");
-            }
+            bool parseResults = m.TryParse(given, out actual);
+            Assert.True(parseResults, "TryParse should succeed.");
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
+        [InlineData("2++3")]
         [InlineData("+2")]
         [InlineData("+2+3")]
         [InlineData("+2+3+")]

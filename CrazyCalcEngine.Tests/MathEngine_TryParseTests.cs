@@ -19,6 +19,9 @@ namespace CrazyCalcEngine.Tests
         [InlineData("-2 + 3", 1)]
         [InlineData("3 + -2", 1)]
 
+        [InlineData("5-3", 2)]
+        [InlineData("11-5-3", 3)]
+
         public void TryParse_ShouldSucceed(string given, int expected)
         {
             var m = new MathEngine();

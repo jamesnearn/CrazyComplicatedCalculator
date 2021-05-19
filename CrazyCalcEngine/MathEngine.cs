@@ -7,7 +7,11 @@ namespace CrazyCalcEngine
     {
         public bool TryParse(string given, out int result)
         {
-            var addendums = given.RemoveSpaces().Split('+');
+            given = given.RemoveSpaces();
+
+            given = SubtractionIsAdditionOfNegativeNumbers(given);
+
+            var addendums = given.Split('+');
             result = 0;
             foreach (var addendum in addendums)
             {
@@ -22,6 +26,14 @@ namespace CrazyCalcEngine
                 }
             }
             return true;
+        }
+
+        public string SubtractionIsAdditionOfNegativeNumbers(string given)
+        {
+            if (given.Length >= 3) {
+                given = given[0] + given.Substring(1).Replace("-", "+-").Replace("++-", "+-");
+            }
+            return given;
         }
     }
 }
